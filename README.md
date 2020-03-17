@@ -58,7 +58,6 @@ nephro
 
 ```
 
-Output results storing
 
 
 ### Scripts
