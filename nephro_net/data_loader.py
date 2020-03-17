@@ -112,10 +112,10 @@ def get_dataloader(sets, root_dir, manifest_path, task, batch_size=1, return_pid
             if set == 'train':
                 ds = Dataset(set='train',  task = task, root_dir=root_dir, manifest_path = manifest_path, return_pid = return_pid,
                              transform=transforms.Compose([transforms.ToPILImage(),
-                                                           transforms.RandomHorizontalFlip(),  # default is 50%
-                                                           transforms.RandomAffine(25,  # rotation
-                                                                                   translate=(0.1, 0.1),
-                                                                                   shear = (-15, 15)),
+                                                           #transforms.RandomHorizontalFlip(),  # default is 50%
+                                                           #transforms.RandomAffine(25,  # rotation
+                                                           #                        translate=(0.1, 0.1),
+                                                           #                        shear = (-15, 15)),
                                                            transforms.ToTensor(),
                                                            ]))
                 loader = DataLoader(ds, batch_size=batch_size, shuffle=True)
