@@ -2,6 +2,7 @@
   * checkpoint restoration
   * fix tensorboard implementation on hpf
   * clean up code and documentation. right now it's more for my own purposes than anything!
+  * fix the naming of the 'best' model checkpoint
 
 __________________
 
