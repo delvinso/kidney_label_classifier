@@ -1,3 +1,7 @@
+#### TODO
+  * checkpoint restoration
+  * fix tensorboard implementation on hpf
+  * clean up code and documentation. right now it's more for my own purposes than anything!
 
 __________________
 
@@ -8,15 +12,15 @@ Using images labelled from the Goldenberg labelling party consisting of roughly 
 * Images are split into a training/validation (80/20) cohorts by patient id as standard.
 * Checkpoints are saved for the latest model (ie. if ran for 50 epochs, then a model will be saved and overwritten for each and every epoch, up until cancellation or epoch = 50) and a separate model corresponding to the lowest validation loss (the 'best' model).
 * Dataset is divided into the 'full' dataset, and a smaller sample dataset consisting of 2000 images
-* Weighting BCE loss by the class count/min(class_count)
-* TODO: checkpoint restoration, fix tensorboard implementation on hpf
+* BCE loss can be weighted by the class count/min(class_count) or class count/max(class_count)
+
 
 ### Current Available Tasks:
 * Bladder vs Other (Includes all other images ie. sagittal and transverse, *not just* images that have been labelled as 'other' ) (**2 - bladder**)
 * Bladder vs Other vs Sagittal vs Transverse (**4 - view**)
 * Bladder vs Other vs Sagittal Left vs Sagittal Right vs Transverse Left vs Transverse Right (**6 -- granular**)
 
-This is passed as an argument to `train_and_eval.py` as `task={bladder|view|granular}`
+This is passed as an argument to `train_and_eval.sh` as `task={bladder|view|granular}`
 
 ### Current Available Models:
 #### Pre-Trained:
@@ -69,9 +73,13 @@ Output results storing
 
 `evaluate_models.py`
 * given models (checkpoints), loops over and generates various metrics and figures (AUC if binary, confusion matrix, and classification report) for training and validation sets
+* technically not best practice for how confusion matrix is classified for binary tasks
 
 `predict_bladder.py`
 * computes the probability that a given image is a bladder
+
+`get_preds.py`
+* computes softmax (probabilities) that a given image belongs to a class
 
 
 ### Example Usage :
